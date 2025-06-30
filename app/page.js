@@ -1,103 +1,201 @@
+'use client';
+
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { useState } from "react";
+import { Calendar } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+
+function getMinSelectableDate() {
+  const date = new Date();
+  date.setDate(date.getDate() + 1); // bloquea hoy y los próximos 3 días
+  return date;
+}
+
+const COLORS = {
+  primary: '#1e3932',
+  secondary: '#d4e9e2',
+  accent: '#00754a',
+  background: '#f3f1e7',
+  text: '#000000'
+};
+
+const products = [
+  {
+    name: 'Pastel de Chocolate',
+    ingredientes: ['chocolate', 'harina', 'azúcar', 'huevo'],
+    precio: [250, 350, 450], // precios para diferentes tamaños
+    porciones: [8, 12, 16], // porciones para cada tamaño
+    descripcion: 'Delicioso pastel de chocolate con cobertura de ganache.',
+    image: '/cake_1.jpg', // chocolate cake
+  },
+  {
+    name: 'Muffins de Arándano',
+    ingredientes: ['arándano', 'harina', 'azúcar', 'huevo'],
+    precio: [150, 200, 250], // precios para diferentes tamaños
+    porciones: [6, 9, 12], // porciones para cada tamaño
+    descripcion: 'Suaves muffins de arándano con un toque de canela.',
+    image: '/cake_2.jpg', // blueberry muffins
+  },
+  {
+    name: 'Cupcakes de Vainilla',
+    ingredientes: ['vainilla', 'harina', 'azúcar', 'huevo'],
+    precio: [120, 180, 240], // precios para diferentes tamaños
+    porciones: [4, 6, 8], // porciones para cada tamaño
+    descripcion: 'Esponjosos cupcakes de vainilla con crema de mantequilla.',
+    image: '/cake_3.jpg', // vanilla cupcakes
+  },
+  {
+    name: 'Cheesecake',
+    ingredientes: ['queso crema', 'galleta', 'azúcar', 'huevo'],
+    precio: [300, 400, 500], // precios para diferentes tamaños
+    porciones: [10, 14, 18], // porciones para cada tamaño
+    descripcion: 'Clásico cheesecake con base de galleta y mermelada de fresa.',
+    image: '/cake_4.jpg', // cheesecake
+  },
+  {
+    name: 'Tarta de Fresa',
+    ingredientes: ['fresa', 'harina', 'azúcar', 'huevo'],
+    precio: [280, 380, 480], // precios para diferentes tamaños
+    porciones: [8, 12, 16], // porciones para cada tamaño
+    descripcion: 'Fresca tarta de fresa con crema pastelera y masa quebrada.',
+    image: '/cake_5.png', // strawberry tart
+  },
+];
+
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [date, setDate] = useState(new Date());
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [personas, setPersonas] = useState('');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const openModal = (product) => {
+    var productoCustom = {
+      name: product.name,
+      ingredientes: product.ingredientes,
+      precio: [...product.precio, 'Personalizado'],
+      porciones: [...product.porciones, 'Personalizado'],
+      descripcion: product.descripcion,
+      image: product.image
+    }
+
+    setSelectedProduct(productoCustom);
+    setShowModal(true);
+  };
+
+  const handleSendWhatsApp = () => {
+
+    var formatearFecha = (date) => {
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      return new Intl.DateTimeFormat('es-MX', options).format(date);
+    };
+
+    var formatearPersonas = personas === 'Personalizado' ? 'personalizado' : ("para "+personas+" personas."); // Si no se especifica, por defecto es 1 persona
+    const mensaje = `Hola, quiero encargar el producto "${selectedProduct.name}" para el día ${formatearFecha(date)}, ${formatearPersonas}`;
+    const url = `https://wa.me/5218711453898?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+  };
+
+  return (
+    <div className={`min-h-screen`} style={{ backgroundColor: COLORS.background }}>
+      <Navbar />
+      <main className="p-8">
+        <h2 className={`text-3xl font-bold text-[${COLORS.primary}] mb-6`}>Nuestros productos</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((p, i) => (
+            <Card key={i} className="hover:shadow-xl cursor-pointer">
+              <Image
+                src={p.image}
+                alt={p.name}
+                width={500}
+                height={300}
+                className="w-full h-[200px] object-fill !rounded-2xl"
+              />
+              <CardContent>
+                <h3 className={`text-lg font-semibold mt-2 text-[${COLORS.text}]}`}>{p.name}</h3>
+                <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
+                <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
+                  <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
+                  <li><strong>Porciones:</strong> {p.porciones.join(', ')}</li>
+                  <li><strong>Precios:</strong> {p.precio.map((price, index) => (
+                    <span key={index}>
+                      ${price} ({p.porciones[index]} porciones)
+                      {index < p.precio.length - 1 ? ', ' : ''}
+                    </span>
+                  ))}</li>
+                </ul>
+                <button
+                  className={`bg-[${COLORS.accent}] bg-green-700 mb-7 text-white font-semibold py-2 px-4 rounded hover:cursor-pointer hover:bg-green-800 transition-colors duration-200`}
+                  onClick={() => openModal(p)}
+                >
+                  Encargar
+                </button>
+
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <Footer />
+      {showModal && selectedProduct && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <h3 className="text-xl font-bold mb-4 text-gray-800">Encargar {selectedProduct.name}</h3>
+            <label className="block mb-2 text-sm font-semibold">Selecciona una fecha:</label>
+            <label className="block text-sm text-red-500">Las fechas en rojo son fechas no disponibles</label>
+            <Calendar date={date} onChange={setDate} color={COLORS.accent} minDate={getMinSelectableDate()} />
+            <label className="block mb-2 text-sm font-semibold">¿Para cuántas personas?</label>
+            {
+              selectedProduct.porciones.map((porciones, index) => (
+                <div key={index} className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    id={`porciones-${index}`}
+                    name="porciones"
+                    value={porciones}
+                    onChange={(e) => setPersonas(e.target.value)}
+                    className="mr-2"
+                  />
+                  <label htmlFor={`porciones-${index}`} className="text-sm text-gray-700">
+                    {porciones === 'Personalizado' ? (
+                      <input
+                        type="number"
+                        min="1"
+                        className="w-16 border border-gray-300 p-1 rounded"
+                        placeholder="Ej. 12"
+                        onChange={(e) => setPersonas(e.target.value)}
+                      />
+                    ) : (
+                      <>
+                        {porciones} porciones - ${selectedProduct.precio[index]}
+                      </>
+                    )}
+                  </label>
+                </div>
+              ))
+            }
+            <div className="flex justify-end gap-2">
+              <button
+                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 hover:cursor-pointer transition-colors duration-200"
+                onClick={() => setShowModal(false)}
+              >
+                Cancelar
+              </button>
+              <button
+                className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 hover:cursor-pointer transition-colors duration-200"
+                onClick={handleSendWhatsApp}
+              >
+                Enviar a WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
