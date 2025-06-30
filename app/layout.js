@@ -15,7 +15,7 @@ export const metadata = {
   title: "Dulce Brasil",
   description: "Pastelería y repostería brasileña",
   icons: {
-    icon: "/panaderia.png",
+    icon: "https://dulcebrasil.netlify.app/panaderia.png",
   },
   openGraph: {
     title: "Dulce Brasil",
