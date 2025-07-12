@@ -85,11 +85,9 @@ export default function Home() {
                   <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
                   <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
                     <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
-                    <li><strong>Porciones:</strong> {p.porciones.join(', ')}</li>
-                    <li><strong>Precios:</strong> {p.precio.map((price, index) => (
+                    <li><strong>Tamaños: </strong> {p.tamano.map((size, index) => (
                       <span key={index}>
-                        ${price} ({p.porciones[index]} porciones)
-                        {index < p.precio.length - 1 ? ', ' : ''}
+                        {size}
                       </span>
                     ))}</li>
                   </ul>
@@ -126,11 +124,9 @@ export default function Home() {
                   <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
                   <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
                     <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
-                    <li><strong>Porciones:</strong> {p.porciones.join(', ')}</li>
-                    <li><strong>Precios:</strong> {p.precio.map((price, index) => (
+                    <li><strong>Tamaños:</strong> {p.tamano.map((size, index) => (
                       <span key={index}>
-                        ${price} ({p.porciones[index]} porciones)
-                        {index < p.precio.length - 1 ? ', ' : ''}
+                        {size}
                       </span>
                     ))}</li>
                   </ul>
@@ -155,36 +151,6 @@ export default function Home() {
             <label className="block mb-2 text-sm font-semibold">Selecciona una fecha:</label>
             <label className="block text-sm text-red-500">Las fechas en rojo son fechas no disponibles</label>
             <Calendar date={date} onChange={setDate} color={COLORS.accent} minDate={getMinSelectableDate()} />
-            <label className="block mb-2 text-sm font-semibold">¿Para cuántas personas?</label>
-            {
-              selectedProduct.porciones.map((porciones, index) => (
-                <div key={index} className="flex items-center mb-2">
-                  <input
-                    type="radio"
-                    id={`porciones-${index}`}
-                    name="porciones"
-                    value={porciones}
-                    onChange={(e) => setPersonas(e.target.value)}
-                    className="mr-2"
-                  />
-                  <label htmlFor={`porciones-${index}`} className="text-sm text-gray-700">
-                    {porciones === 'Personalizado' ? (
-                      <input
-                        type="number"
-                        min="1"
-                        className="w-16 border border-gray-300 p-1 rounded"
-                        placeholder="Ej. 12"
-                        onChange={(e) => setPersonas(e.target.value)}
-                      />
-                    ) : (
-                      <>
-                        {porciones} porciones - ${selectedProduct.precio[index]}
-                      </>
-                    )}
-                  </label>
-                </div>
-              ))
-            }
             <div className="flex justify-end gap-2">
               <button
                 className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 hover:cursor-pointer transition-colors duration-200"

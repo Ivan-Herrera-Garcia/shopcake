@@ -8,7 +8,7 @@ export default function Footer() {
     };
     return (
         <footer className="text-white p-4 text-center mt-10" style={{ backgroundColor: COLORS.primary }}>
-            <p>&copy; 2025 Dulce Tentación. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Dulce Brasil. Todos los derechos reservados.</p>
         </footer>
     );
 }
