@@ -80,7 +80,29 @@ export default function Home() {
                   <h3 className={`text-lg font-semibold mt-2 text-[${COLORS.text}]`}>{p.name}</h3>
                   <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
                   <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
-                    <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
+                    <li className="mb-2">
+                      <strong>Ingredientes:</strong>
+                      <div className="mt-1 flex flex-wrap gap-2">
+                        {p.ingredientes.map((ing, idx) => {
+                          const colors = [
+                            { bg: 'bg-green-100', text: 'text-green-800' },
+                            { bg: 'bg-orange-100', text: 'text-orange-800' },
+                            { bg: 'bg-blue-100', text: 'text-blue-800' },
+                          ];
+                          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                          return (
+                            <span
+                              key={idx}
+                              className={`${randomColor.bg} ${randomColor.text} text-xs font-semibold px-2.5 py-0.5 rounded-full`}
+                            >
+                              {ing}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </li>
+
+
                     <li><strong>Tamaños: </strong> {p.tamano.map((size, index) => (
                       <span key={index}>
                         {size}
@@ -119,7 +141,29 @@ export default function Home() {
                   <h3 className={`text-lg font-semibold mt-2 text-[${COLORS.text}]`}>{p.name}</h3>
                   <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
                   <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
-                    <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
+                    <li className="mb-2">
+                      <strong>Ingredientes:</strong>
+                      <div className="mt-1 flex flex-wrap gap-2">
+                        {p.ingredientes.map((ing, idx) => {
+                          const colors = [
+                            { bg: 'bg-green-100', text: 'text-green-800' },
+                            { bg: 'bg-orange-100', text: 'text-orange-800' },
+                            { bg: 'bg-blue-100', text: 'text-blue-800' },
+                          ];
+                          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                          return (
+                            <span
+                              key={idx}
+                              className={`${randomColor.bg} ${randomColor.text} text-xs font-semibold px-2.5 py-0.5 rounded-full`}
+                            >
+                              {ing}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </li>
+
+
                     <li><strong>Tamaños:</strong> {p.tamano.map((size, index) => (
                       <span key={index}>
                         {size}

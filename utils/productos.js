@@ -2,7 +2,7 @@ const products = [
   {
     nameNormalidazo: 'Beijinho',
     name: 'Beijinho',
-    ingredientes: ['leche condensada', 'coco rallado', 'mantequilla'],
+    ingredientes: ['Leche Condensada', 'Coco Rallado', 'Mantequilla'],
     precio: [15, 25, 35], // precios para diferentes cantidades
     tamano: ["Grande", "Chico"], // unidades por porción
     descripcion: 'Tradicional dulce brasileño hecho con leche condensada y coco.',
@@ -12,7 +12,7 @@ const products = [
   {
     nameNormalidazo: 'Bicho-de-Pe',
     name: 'Bicho de Pé',
-    ingredientes: ['leche condensada', 'maní', 'chocolate'],
+    ingredientes: ['Leche Condensada', 'Maní', 'Chocolate'],
     precio: [18, 30, 42], 
     tamano: ["Grande", "Chico"],
     descripcion: 'Delicioso dulce brasileño con maní y chocolate.',
@@ -22,7 +22,7 @@ const products = [
   {
     nameNormalidazo: 'Bolo-de-Cenoura',
     name: 'Bolo de Cenoura',
-    ingredientes: ['zanahoria', 'harina', 'azúcar', 'huevo', 'chocolate'],
+    ingredientes: ['Zanahoria', 'Harina', 'Azúcar', 'Huevo', 'Chocolate'],
     precio: [180, 280, 380],
     tamano: ["Grande", "Chico"],
     descripcion: 'Esponjoso pastel de zanahoria con cobertura de chocolate.',
@@ -32,7 +32,7 @@ const products = [
   {
     nameNormalidazo: 'Brigadeiro',
     name: 'Brigadeiro',
-    ingredientes: ['leche condensada', 'cacao en polvo', 'mantequilla', 'granulado'],
+    ingredientes: ['Leche Condensada', 'Cacao en polvo', 'Mantequilla', 'Granulado'],
     precio: [12, 20, 28],
     tamano: ["Grande", "Chico"],
     descripcion: 'El dulce más famoso de Brasil, irresistible brigadeiro.',
@@ -42,7 +42,7 @@ const products = [
   {
     nameNormalidazo: 'Pastel-de-Limon',
     name: 'Pastel de Limón',
-    ingredientes: ['limón', 'harina', 'azúcar', 'huevo', 'crema'],
+    ingredientes: ['Limón', 'Harina', 'Azúcar', 'Huevo', 'Crema'],
     precio: [200, 300, 400],
     tamano: ["Grande", "Chico"],
     descripcion: 'Refrescante pastel de limón con crema suave y esponjosa.',
@@ -52,7 +52,7 @@ const products = [
   {
     nameNormalidazo: 'Pastel-de-Naranja-Pequeno',
     name: 'Pastel de Naranja Pequeño',
-    ingredientes: ['naranja', 'harina', 'azúcar', 'huevo', 'ralladura'],
+    ingredientes: ['Naranja', 'Harina', 'Azúcar', 'Huevo', 'Ralladura'],
     precio: [150, 220, 300],
     tamano: ["Grande", "Chico"],
     descripcion: 'Pastel individual de naranja con sabor cítrico intenso.',
@@ -62,7 +62,7 @@ const products = [
   {
     nameNormalidazo: 'Pastel-de-Naranja',
     name: 'Pastel de Naranja',
-    ingredientes: ['naranja', 'harina', 'azúcar', 'huevo', 'glaseado'],
+    ingredientes: ['Naranja', 'Harina', 'Azúcar', 'Huevo', 'Glaseado'],
     precio: [220, 320, 420],
     tamano: ["Grande", "Chico"],
     descripcion: 'Jugoso pastel de naranja con glaseado cítrico.',
@@ -72,7 +72,7 @@ const products = [
   {
     nameNormalidazo: 'Pastel-Pao-de-Mel',
     name: 'Pastel Pão de Mel',
-    ingredientes: ['miel', 'especias', 'harina', 'chocolate', 'nueces'],
+    ingredientes: ['Miel', 'Especias', 'Harina', 'Chocolate', 'Nueces'],
     precio: [190, 290, 390],
     tamano: ["Grande", "Chico"],
     descripcion: 'Tradicional pan de miel brasileño con chocolate y especias.',
@@ -82,7 +82,7 @@ const products = [
   {
     nameNormalidazo: 'Pastel-de-Zanahoria-Chico',
     name: 'Pastel de Zanahoria Chico',
-    ingredientes: ['zanahoria', 'harina', 'azúcar', 'canela', 'nueces'],
+    ingredientes: ['Zanahoria', 'Harina', 'Azúcar', 'Canela', 'Nueces'],
     precio: [160, 240, 320],
     tamano: ["Grande", "Chico"],
     descripcion: 'Pastel de zanahoria tamaño individual con canela y nueces.',
@@ -92,7 +92,7 @@ const products = [
   {
     nameNormalidazo: 'Pastel-de-Zanahoria-Grande',
     name: 'Pastel de Zanahoria Grande',
-    ingredientes: ['zanahoria', 'harina', 'azúcar', 'canela', 'crema cheese'],
+    ingredientes: ['Zanahoria', 'Harina', 'Azúcar', 'Canela', 'Crema Cheese'],
     precio: [250, 350, 450],
     tamano: ["Grande", "Chico"],
     descripcion: 'Generoso pastel de zanahoria con cobertura de queso crema.',
