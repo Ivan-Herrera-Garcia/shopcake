@@ -28,14 +28,12 @@ export default function Home() {
   const [date, setDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [personas, setPersonas] = useState('');
 
   const openModal = (product) => {
     var productoCustom = {
       name: product.name,
       ingredientes: product.ingredientes,
       precio: [...product.precio, 'Personalizado'],
-      porciones: [...product.porciones, 'Personalizado'],
       descripcion: product.descripcion,
       image: product.image
     }
@@ -45,16 +43,14 @@ export default function Home() {
   };
 
   const handleSendWhatsApp = () => {
-
     var formatearFecha = (date) => {
       const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
       return new Intl.DateTimeFormat('es-MX', options).format(date);
     };
 
-    var formatearPersonas = personas === 'Personalizado' ? 'personalizado' : ("para " + personas + " personas."); // Si no se especifica, por defecto es 1 persona
-    const mensaje = `Hola, quiero encargar el producto "${selectedProduct.name}" para el día ${formatearFecha(date)}, ${formatearPersonas}`;
+    const mensaje = `Hola, quiero encargar el producto "${selectedProduct.name}" para el día ${formatearFecha(date)}`;
     const url = `https://wa.me/5218711453898?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, '_blank');
+    window.open(url, '_self');
   };
 
   return (
