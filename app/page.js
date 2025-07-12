@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Calendar } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import products from "@/utils/productos";
 
 function getMinSelectableDate() {
   const date = new Date();
@@ -22,50 +23,6 @@ const COLORS = {
   background: '#f3f1e7',
   text: '#000000'
 };
-
-const products = [
-  {
-    name: 'Pastel de Chocolate',
-    ingredientes: ['chocolate', 'harina', 'azúcar', 'huevo'],
-    precio: [250, 350, 450], // precios para diferentes tamaños
-    porciones: [8, 12, 16], // porciones para cada tamaño
-    descripcion: 'Delicioso pastel de chocolate con cobertura de ganache.',
-    image: '/cake_1.jpg', // chocolate cake
-  },
-  {
-    name: 'Muffins de Arándano',
-    ingredientes: ['arándano', 'harina', 'azúcar', 'huevo'],
-    precio: [150, 200, 250], // precios para diferentes tamaños
-    porciones: [6, 9, 12], // porciones para cada tamaño
-    descripcion: 'Suaves muffins de arándano con un toque de canela.',
-    image: '/cake_2.jpg', // blueberry muffins
-  },
-  {
-    name: 'Cupcakes de Vainilla',
-    ingredientes: ['vainilla', 'harina', 'azúcar', 'huevo'],
-    precio: [120, 180, 240], // precios para diferentes tamaños
-    porciones: [4, 6, 8], // porciones para cada tamaño
-    descripcion: 'Esponjosos cupcakes de vainilla con crema de mantequilla.',
-    image: '/cake_3.jpg', // vanilla cupcakes
-  },
-  {
-    name: 'Cheesecake',
-    ingredientes: ['queso crema', 'galleta', 'azúcar', 'huevo'],
-    precio: [300, 400, 500], // precios para diferentes tamaños
-    porciones: [10, 14, 18], // porciones para cada tamaño
-    descripcion: 'Clásico cheesecake con base de galleta y mermelada de fresa.',
-    image: '/cake_4.jpg', // cheesecake
-  },
-  {
-    name: 'Tarta de Fresa',
-    ingredientes: ['fresa', 'harina', 'azúcar', 'huevo'],
-    precio: [280, 380, 480], // precios para diferentes tamaños
-    porciones: [8, 12, 16], // porciones para cada tamaño
-    descripcion: 'Fresca tarta de fresa con crema pastelera y masa quebrada.',
-    image: '/cake_5.png', // strawberry tart
-  },
-];
-
 
 export default function Home() {
   const [date, setDate] = useState(new Date());
@@ -94,7 +51,7 @@ export default function Home() {
       return new Intl.DateTimeFormat('es-MX', options).format(date);
     };
 
-    var formatearPersonas = personas === 'Personalizado' ? 'personalizado' : ("para "+personas+" personas."); // Si no se especifica, por defecto es 1 persona
+    var formatearPersonas = personas === 'Personalizado' ? 'personalizado' : ("para " + personas + " personas."); // Si no se especifica, por defecto es 1 persona
     const mensaje = `Hola, quiero encargar el producto "${selectedProduct.name}" para el día ${formatearFecha(date)}, ${formatearPersonas}`;
     const url = `https://wa.me/5218711453898?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
@@ -105,40 +62,90 @@ export default function Home() {
       <Navbar />
       <main className="p-8">
         <h2 className={`text-3xl font-bold text-[${COLORS.primary}] mb-6`}>Nuestros productos</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((p, i) => (
-            <Card key={i} className="hover:shadow-xl cursor-pointer">
-              <Image
-                src={p.image}
-                alt={p.name}
-                width={500}
-                height={300}
-                className="w-full h-[200px] object-fill !rounded-2xl"
-              />
-              <CardContent>
-                <h3 className={`text-lg font-semibold mt-2 text-[${COLORS.text}]}`}>{p.name}</h3>
-                <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
-                <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
-                  <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
-                  <li><strong>Porciones:</strong> {p.porciones.join(', ')}</li>
-                  <li><strong>Precios:</strong> {p.precio.map((price, index) => (
-                    <span key={index}>
-                      ${price} ({p.porciones[index]} porciones)
-                      {index < p.precio.length - 1 ? ', ' : ''}
-                    </span>
-                  ))}</li>
-                </ul>
-                <button
-                  className={`bg-[${COLORS.accent}] bg-green-700 mb-7 text-white font-semibold py-2 px-4 rounded hover:cursor-pointer hover:bg-green-800 transition-colors duration-200`}
-                  onClick={() => openModal(p)}
-                >
-                  Encargar
-                </button>
+        <section>
+          <div className="text-center mb-8">
+            <h2 className={`text-3xl font-extrabold mb-2 text-[${COLORS.text}]`}>Postres Brasileños</h2>
+            <p className={`text-md text-[${COLORS.text}] max-w-xl mx-auto`}>
+              Deliciosos pasteles y dulces típicos de Brasil, preparados con ingredientes frescos y recetas tradicionales que celebran el sabor y la alegría de la cocina brasileña.
+            </p>
+          </div>
 
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {products.filter(p => !p.isDulce).map((p, i) => (
+              <Card key={i} className="hover:shadow-xl cursor-pointer">
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  width={500}
+                  height={300}
+                  className="w-full h-[200px] object-contain !rounded-2xl"
+                />
+                <CardContent>
+                  <h3 className={`text-lg font-semibold mt-2 text-[${COLORS.text}]`}>{p.name}</h3>
+                  <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
+                  <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
+                    <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
+                    <li><strong>Porciones:</strong> {p.porciones.join(', ')}</li>
+                    <li><strong>Precios:</strong> {p.precio.map((price, index) => (
+                      <span key={index}>
+                        ${price} ({p.porciones[index]} porciones)
+                        {index < p.precio.length - 1 ? ', ' : ''}
+                      </span>
+                    ))}</li>
+                  </ul>
+                  <button
+                    className={`bg-[${COLORS.accent}] bg-green-700 mb-7 text-white font-semibold py-2 px-4 rounded hover:cursor-pointer hover:bg-green-800 transition-colors duration-200`}
+                    onClick={() => openModal(p)}
+                  >
+                    Encargar
+                  </button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10">
+          <div className="text-center mb-8">
+            <h2 className={`text-3xl font-extrabold mb-2 text-[${COLORS.text}]`}>Dulces Típicos</h2>
+            <p className={`text-md text-[${COLORS.text}] max-w-xl mx-auto`}>
+              Una selección de dulces típicos de Brasil, perfectos para compartir o disfrutar como un capricho. Cada uno refleja la riqueza y variedad de la repostería brasileña.
+            </p>
+          </div>          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {products.filter(p => p.isDulce).map((p, i) => (
+              <Card key={i} className="hover:shadow-xl cursor-pointer">
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  width={500}
+                  height={300}
+                  className="w-full h-[200px] object-contain !rounded-2xl"
+                />
+                <CardContent>
+                  <h3 className={`text-lg font-semibold mt-2 text-[${COLORS.text}]`}>{p.name}</h3>
+                  <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
+                  <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
+                    <li><strong>Ingredientes:</strong> {p.ingredientes.join(', ')}</li>
+                    <li><strong>Porciones:</strong> {p.porciones.join(', ')}</li>
+                    <li><strong>Precios:</strong> {p.precio.map((price, index) => (
+                      <span key={index}>
+                        ${price} ({p.porciones[index]} porciones)
+                        {index < p.precio.length - 1 ? ', ' : ''}
+                      </span>
+                    ))}</li>
+                  </ul>
+                  <button
+                    className={`bg-[${COLORS.accent}] bg-green-700 mb-7 text-white font-semibold py-2 px-4 rounded hover:cursor-pointer hover:bg-green-800 transition-colors duration-200`}
+                    onClick={() => openModal(p)}
+                  >
+                    Encargar
+                  </button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
       </main>
       <Footer />
       {showModal && selectedProduct && (
