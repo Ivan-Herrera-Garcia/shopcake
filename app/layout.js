@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Dulce Brasil",
-  description: "Pastelería y repostería brasileña",
+  description: "Desde la calidez de Brasil, traemos los sabores más auténticos y deliciosos de la repostería brasileña. Disfruta de nuestros pasteles y dulces tradicionales, elaborados con amor y pasión por la cocina brasileña.",
   icons: {
     icon: "https://dulcebrasil.netlify.app/panaderia.png",
   },
   openGraph: {
     title: "Dulce Brasil",
-    description: "Pastelería y repostería brasileña",
+    description: "Desde la calidez de Brasil, traemos los sabores más auténticos y deliciosos de la repostería brasileña. Disfruta de nuestros pasteles y dulces tradicionales, elaborados con amor y pasión por la cocina brasileña.",
     url: "https://dulcebrasil.netlify.app/",
     siteName: "Dulce Brasil",
     images: [
@@ -33,7 +33,7 @@ export const metadata = {
   },
   twitter: {
     title: "Dulce Brasil",
-    description: "Pastelería y repostería brasileña",
+    description: "Desde la calidez de Brasil, traemos los sabores más auténticos y deliciosos de la repostería brasileña. Disfruta de nuestros pasteles y dulces tradicionales, elaborados con amor y pasión por la cocina brasileña.",
     card: "summary_large_image",
     site: "@dulcebrasil",
   },
