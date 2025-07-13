@@ -125,3 +125,10 @@
 .rdrDayDisabled {
   background-color: tomato !important;
 }
+
+.fondoImg {
+  background-image: url("https://dulcebrasil.netlify.app/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
