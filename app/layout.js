@@ -15,7 +15,7 @@ export const metadata = {
   title: "Dulce Brasil",
   description: "Desde la calidez de Brasil, traemos los sabores más auténticos y deliciosos de la repostería brasileña. Disfruta de nuestros pasteles y dulces tradicionales, elaborados con amor y pasión por la cocina brasileña.",
   icons: {
-    icon: "https://dulcebrasil.netlify.app/panaderia.png",
+    icon: "https://dulcebrasil.netlify.app/image_2.jpg",
   },
   openGraph: {
     title: "Dulce Brasil",
@@ -24,7 +24,7 @@ export const metadata = {
     siteName: "Dulce Brasil",
     images: [
       {
-        url: "https://dulcebrasil.netlify.app/panaderia.png",
+        url: "https://dulcebrasil.netlify.app/image_2.jpg",
         width: 800,
         height: 600,
         alt: "Dulce Brasil Logo",
