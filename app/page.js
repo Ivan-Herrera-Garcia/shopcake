@@ -105,7 +105,8 @@ export default function Home() {
 
                     <li><strong>Tamaños: </strong> {p.tamano.map((size, index) => (
                       <span key={index}>
-                        {size}
+                        {size === "Grande" ? <span className="bg-green-700 text-white rounded-2xl px-2.5 py-0.5">{size}</span> : <span className="bg-blue-700 text-white rounded-2xl px-2.5 py-0.5">{size}</span>
+                        }{index < p.tamano.length - 1 && ' '}
                       </span>
                     ))}</li>
                   </ul>
@@ -166,7 +167,8 @@ export default function Home() {
 
                     <li><strong>Tamaños:</strong> {p.tamano.map((size, index) => (
                       <span key={index}>
-                        {size}
+                        {size === "Grande" ? <span className="bg-green-700 text-white rounded-2xl px-2.5 py-0.5">{size}</span> : <span className="bg-blue-700 text-white rounded-2xl px-2.5 py-0.5">{size}</span>
+                        }{index < p.tamano.length - 1 && ' '}
                       </span>
                     ))}</li>
                   </ul>
