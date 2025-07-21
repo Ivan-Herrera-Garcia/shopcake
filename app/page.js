@@ -54,7 +54,7 @@ export default function Home() {
   };
 
   return (
-    <div className={`min-h-screen fondoImg`}>
+    <div className={`min-h-screen fondoImg !playfair`}>
       <Navbar />
       <main className="p-8">
         <h2 className={`text-3xl font-bold text-[${COLORS.primary}] mb-6`}>Nuestros productos</h2>
