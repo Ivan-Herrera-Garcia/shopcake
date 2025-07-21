@@ -5,7 +5,7 @@ const products = [
     ingredientes: ['Leche Condensada', 'Coco Rallado', 'Mantequilla'],
     precio: [15, 25, 35], // precios para diferentes cantidades
     tamano: ["Grande", "Chico"], // unidades por porción
-    descripcion: 'Tradicional dulce brasileño hecho con leche condensada y coco.',
+    descripcion: 'Tradicional Brasiliuseño hecho con leche condensada y coco.',
     image: '/Beijinho 1.jpg',
     isDulce: true, // Indica que es un dulce
   },
@@ -15,7 +15,7 @@ const products = [
     ingredientes: ['Leche Condensada', 'Maní', 'Chocolate'],
     precio: [18, 30, 42], 
     tamano: ["Grande", "Chico"],
-    descripcion: 'Delicioso dulce brasileño con maní y chocolate.',
+    descripcion: 'Delicioso Brasiliuseño con maní y chocolate.',
     image: '/Bicho de pé 1.jpg',
     isDulce: true, // Indica que es un dulce
   },

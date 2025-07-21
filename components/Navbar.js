@@ -10,7 +10,12 @@ export default function Navbar() {
     };
     return (
         <nav className="text-white p-4 flex justify-between" style={{ backgroundColor: COLORS.primary }}>
-            <h1 className="text-xl font-bold">Dulce Brasil</h1>
+            {/* Incluir mascota mascota.png */}
+            <Link href="/">
+                <img src="/mascota.png" alt="Mascota" className="w-12 h-12" />
+            </Link>
+            {/* Logo de Brasilius */}
+            <h1 className="text-xl font-bold">Brasilius</h1>
         </nav>
     );
 }
