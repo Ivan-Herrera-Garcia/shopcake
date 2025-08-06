@@ -76,9 +76,9 @@ export default function Home() {
                   className="w-full h-[200px] object-contain !rounded-2xl"
                 />
                 <CardContent>
-                  <h3 className={`text-lg font-semibold mt-2 text-[${COLORS.text}]`}>{p.name}</h3>
-                  <p className={`text-sm text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
-                  <ul className={`text-sm text-[${COLORS.text}] mb-2`}>
+                  <h3 className={`text-lg font-bold mt-2 text-[${COLORS.text}]`}>{p.name}</h3>
+                  <p className={`text-md text-[${COLORS.text}] mb-2`}>{p.descripcion}</p>
+                  <ul className={`text-md text-[${COLORS.text}] mb-2`}>
                     <li className="mb-2">
                       <strong>Ingredientes:</strong>
                       <div className="mt-1 flex flex-wrap gap-2">
@@ -92,7 +92,7 @@ export default function Home() {
                           return (
                             <span
                               key={idx}
-                              className={`${randomColor.bg} ${randomColor.text} text-xs font-semibold px-2.5 py-0.5 rounded-full`}
+                              className={`${randomColor.bg} ${randomColor.text} text-sm font-bold px-2.5 py-0.5 rounded-full`}
                             >
                               {ing}
                             </span>
