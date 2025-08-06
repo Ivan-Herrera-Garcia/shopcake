@@ -57,11 +57,10 @@ export default function Home() {
     <div className={`min-h-screen fondoImg !playfair`}>
       <Navbar />
       <main className="p-8">
-        <h2 className={`text-3xl font-bold text-[${COLORS.primary}] mb-6`}>Nuestros productos</h2>
         <section>
-          <div className="text-center mb-8">
+          <div className="text-start mb-8">
             <h2 className={`text-3xl font-extrabold mb-2 text-[${COLORS.text}]`}>Postres Brasileños</h2>
-            <p className={`text-md text-[${COLORS.text}] max-w-xl mx-auto`}>
+            <p className={`text-md text-[${COLORS.text}] max-w-xl`}>
               Deliciosos pasteles y dulces típicos de Brasil, preparados con ingredientes frescos y recetas tradicionales que celebran el sabor y la alegría de la cocina brasileña.
             </p>
           </div>
