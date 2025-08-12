@@ -11,6 +11,10 @@ const config = {
         playfair: ['"Playfair Display"', 'serif'],
       }
     },
+    colors: {
+      principal: '#244437',
+      secundario: '#85bacc'
+    }
   },
   plugins: [],
 };

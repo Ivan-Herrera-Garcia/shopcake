@@ -5,13 +5,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-
-@layer base {
-  html {
-    font-family: 'Playfair Display', serif;
-  }
-}
 
 
 @theme inline {
@@ -137,14 +130,16 @@
   background-color: tomato !important;
 }
 
-.fondoImg {
-  /*background: -webkit-linear-gradient(180deg, #44ff0079, #d1e6dc, #5fe01a8c);
-  /* Chrome 10-25, Safari 5.1-6 */
-  /*background: linear-gradient(180deg, #44ff0088, #d1e6dc, #5fe01a86);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background-color: #F3E9DC;
+.principal {
+  color: #244437;
 }
 
-button, h1, h2, h3, h4, h5, h6 {
-  color: #7ACCC8;
+.secundario {
+  color: #85bacc;
+}
+
+.cursive {
+  font-family: "Cedarville Cursive", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
