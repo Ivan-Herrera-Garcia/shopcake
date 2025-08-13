@@ -37,19 +37,17 @@ export default function HomePage() {
         {/* Sección Productos Salados */}
         <div className="w-full max-w-7xl mb-12">
           <div
-            className={`transition-all duration-500 ease-in-out ${
-              showAll
-                ? "grid mx-auto w-full sm:w-[90%] lg:w-1/2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center"
-                : "flex w-full overflow-x-auto gap-4 justify-center touch-scroll"
-            }`}
+            className={`transition-all duration-500 ease-in-out ${showAll
+              ? "grid mx-auto w-full sm:w-[90%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center"
+              : "flex w-full overflow-x-auto gap-4 justify-center touch-scroll"
+              }`}
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             {productosVisibles.map((product) => (
               <div
                 key={product.name + "-salado"}
-                className={`relative cursor-pointer transition-transform duration-300 hover:opacity-80 ${
-                  showAll ? "" : "flex-shrink-0"
-                }`}
+                className={`relative cursor-pointer transition-transform duration-300 hover:opacity-80 ${showAll ? "" : "flex-shrink-0"
+                  }`}
                 onClick={() => setSelectedProduct(product)}
               >
                 <Image
@@ -72,9 +70,8 @@ export default function HomePage() {
           >
             {showAll ? "Mostrar menos" : "Mostrar más"}
             <span
-              className={`transition-transform duration-300 ${
-                showAll ? "rotate-180" : ""
-              }`}
+              className={`transition-transform duration-300 ${showAll ? "rotate-180" : ""
+                }`}
             >
               ▼
             </span>
@@ -84,19 +81,17 @@ export default function HomePage() {
         {/* Sección Productos Dulces */}
         <div className="w-full max-w-7xl mb-12">
           <div
-            className={`transition-all duration-500 ease-in-out ${
-              showAllDulces
-                ? "grid mx-auto w-full sm:w-[90%] lg:w-1/2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center"
-                : "flex w-full overflow-x-auto gap-4 justify-center touch-scroll"
-            }`}
+            className={`transition-all duration-500 ease-in-out ${showAllDulces
+              ? "grid mx-auto w-full sm:w-[90%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center"
+              : "flex w-full overflow-x-auto gap-4 justify-center touch-scroll"
+              }`}
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             {productosDulcesVisibles.map((product) => (
               <div
                 key={product.name + "-dulce"}
-                className={`relative cursor-pointer transition-transform duration-300 hover:opacity-80 ${
-                  showAllDulces ? "" : "flex-shrink-0"
-                }`}
+                className={`relative cursor-pointer transition-transform duration-300 hover:opacity-80 ${showAllDulces ? "" : "flex-shrink-0"
+                  }`}
                 onClick={() => setSelectedProduct(product)}
               >
                 <Image
@@ -119,9 +114,8 @@ export default function HomePage() {
           >
             {showAllDulces ? "Mostrar menos" : "Mostrar más"}
             <span
-              className={`transition-transform duration-300 ${
-                showAllDulces ? "rotate-180" : ""
-              }`}
+              className={`transition-transform duration-300 ${showAllDulces ? "rotate-180" : ""
+                }`}
             >
               ▼
             </span>
@@ -163,21 +157,23 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="text-white py-4 bg-[#244437] relative overflow-hidden">
         <div
-          className="absolute top-0 left-0 w-full h-6 bg-[length:50px_50px] bg-repeat-x"
+          className="absolute top-0 left-0 w-full h-6 bg-repeat-x"
           style={{
+            backgroundSize: "52px 52px", // un poco más grande que 50px
             backgroundImage: `
-              linear-gradient(
-                to right,
-                transparent 0%,
-                transparent 25%,
-                white 25%,
-                white 75%,
-                transparent 75%,
-                transparent 100%
-              )
-            `,
+      linear-gradient(
+        to right,
+        transparent 0%,
+        transparent 25%,
+        white 25%,
+        white 75%,
+        transparent 75%,
+        transparent 100%
+      )
+    `,
           }}
         />
+
         <div className="container mx-auto text-center mt-8 relative z-10">
           <h2 className="cursive text-3xl italic">Contactanos</h2>
           <p>&copy; 2023 Brasilius. Todos los derechos reservados.</p>
