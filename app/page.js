@@ -3,28 +3,89 @@ import products from "@/utils/productos";
 import Image from "next/image";
 import { useState } from "react";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/store/cartSlice";
+
+
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+
+import CarritoSidebar from "@/components/carrito/CarritoSidebar";
+
+
 export default function HomePage() {
-  const [showAll, setShowAll] = useState(false);
-  const [showAllDulces, setShowAllDulces] = useState(false);
+
+  const dispatch = useDispatch();
+  const [cantidad, setCantidad] = useState(1); // cantidad inicial
+
+  const handleAddToCart = () => {
+    if (cantidad < 1) return; // evitar agregar 0 o negativo
+    dispatch(addToCart({ ...selectedProduct, quantity: cantidad }));
+    setSelectedProduct(null); // cerrar modal
+  };
+
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const salados = products.filter((p) => !p.isDulce);
-  const productosVisibles = showAll ? salados : salados.slice(0, 4);
 
   const productosDulces = products.filter((p) => p.isDulce);
-  const productosDulcesVisibles = showAllDulces ? productosDulces : productosDulces.slice(0, 4);
+
+  const [showCart, setShowCart] = useState(false);
+
+  const [tamano, settamano] = useState("chico"); // tamano inicial
+
 
   return (
     <main className="min-h-screen flex flex-col bg-[#606060]">
+
+      <div className="flex items-center justify-between py-4 bg-[#244437] px-4">
+
+        {/* Logo */}
+        <div className="flex justify-center flex-1">
+          <Image
+            src="/logobrasilius.svg"
+            alt="Logo"
+            width={150}
+            height={150}
+            className="object-contain"
+          />
+        </div>
+        {/* Botón carrito */}
+        <button onClick={() => setShowCart(true)} className="relative hover:cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 w-8 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8H19m-12 0a1 1 0 100 2 1 1 0 000-2zm10 0a1 1 0 100 2 1 1 0 000-2z"
+            />
+          </svg>
+          {/* Puedes agregar un contador de items */}
+        </button>
+
+        {showCart && <CarritoSidebar onClose={() => setShowCart(false)} />}
+      </div>
+
       <div className="flex-grow bg-white flex flex-col items-center justify-center px-4 py-6">
 
         {/* Navbar */}
         <nav className="flex justify-center w-full mb-6">
           <ul className="flex space-x-6 md:space-x-10 text-lg md:text-2xl font-bold">
             <li><a href="#" className="principal">Pasteles</a></li>
-            <li><a href="#" className="principal">Roscas</a></li>
+            {/* <li><a href="#" className="principal">Roscas</a></li> */}
             <li><a href="#" className="principal">Dulces</a></li>
-            <li><a href="#" className="principal">Galeria</a></li>
+            {/* <li><a href="#" className="principal">Galeria</a></li> */}
           </ul>
         </nav>
 
@@ -34,125 +95,216 @@ export default function HomePage() {
           <span className="secundario cursive text-[32px]">deliciosa</span>
         </h2>
 
-        {/* Sección Productos Salados */}
-        <div className="w-full max-w-7xl mb-12">
-          <div
-            className={`transition-all duration-500 ease-in-out ${showAll
-              ? "grid mx-auto w-full sm:w-[90%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center"
-              : "flex w-full overflow-x-auto gap-4 justify-center touch-scroll"
-              }`}
-            style={{ WebkitOverflowScrolling: "touch" }}
+        <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center">
+          <Swiper
+            modules={[Navigation]}
+            navigation={{
+              nextEl: "#nextSalados",
+              prevEl: "#prevSalados",
+              disabledClass: "swiper-button-disabled", // clase aplicada cuando no hay más
+            }}
+            grabCursor={true}
+            spaceBetween={0}
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: "auto" },
+            }}
+            watchSlidesProgress
+            watchOverflow
+            className="!px-0 !mx-0 w-full"
           >
-            {productosVisibles.map((product) => (
-              <div
-                key={product.name + "-salado"}
-                className={`relative cursor-pointer transition-transform duration-300 hover:opacity-80 ${showAll ? "" : "flex-shrink-0"
-                  }`}
-                onClick={() => setSelectedProduct(product)}
+            {salados.map((product) => (
+              <SwiperSlide
+                key={product.name}
+                className="!w-[250px] !m-0 !p-0 relative"
               >
                 <Image
                   src={product.image}
                   alt={product.name}
                   width={250}
                   height={250}
-                  className="w-[250px] h-[250px] object-cover brightness-90 rounded-lg"
+                  className="w-[250px] h-[250px] object-cover rounded-none brightness-90"
+                  onClick={() => setSelectedProduct({ ...product, tamano })}
                 />
                 <h3 className="absolute bottom-2 left-2 text-lg font-bold text-white drop-shadow-md">
                   {product.name}
                 </h3>
-              </div>
+              </SwiperSlide>
             ))}
+          </Swiper>
+
+          {/* Botones flechas */}
+          <div className="flex items-center justify-center gap-4 mt-4">
+            <button
+              id="prevSalados"
+              className="bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:bg-gray-100 font-bold disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <FaArrowLeft />
+            </button>
+
+            <button
+              id="nextSalados"
+              className="bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:bg-gray-100 font-bold disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <FaArrowRight />
+            </button>
           </div>
 
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="mt-4 px-4 py-2 bg-white text-black rounded-full flex items-center gap-2 mx-auto hover:cursor-pointer shadow-2xl transition-colors hover:bg-gray-300"
-          >
-            {showAll ? "Mostrar menos" : "Mostrar más"}
-            <span
-              className={`transition-transform duration-300 ${showAll ? "rotate-180" : ""
-                }`}
-            >
-              ▼
-            </span>
-          </button>
+          <p className="mt-2 text-sm sm:text-base">Ver más</p>
         </div>
 
-        {/* Sección Productos Dulces */}
-        <div className="w-full max-w-7xl mb-12">
-          <div
-            className={`transition-all duration-500 ease-in-out ${showAllDulces
-              ? "grid mx-auto w-full sm:w-[90%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center"
-              : "flex w-full overflow-x-auto gap-4 justify-center touch-scroll"
-              }`}
-            style={{ WebkitOverflowScrolling: "touch" }}
+        <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center">
+          <Swiper
+            modules={[Navigation]}
+            navigation={{
+              nextEl: "#nextDulces",
+              prevEl: "#prevDulces",
+              disabledClass: "swiper-button-disabled", // clase aplicada cuando no hay más
+            }}
+            grabCursor={true}
+            spaceBetween={0}
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: "auto" },
+            }}
+            watchSlidesProgress
+            watchOverflow
+            className="!px-0 !mx-0 w-full"
           >
-            {productosDulcesVisibles.map((product) => (
-              <div
-                key={product.name + "-dulce"}
-                className={`relative cursor-pointer transition-transform duration-300 hover:opacity-80 ${showAllDulces ? "" : "flex-shrink-0"
-                  }`}
-                onClick={() => setSelectedProduct(product)}
+            {productosDulces.map((product) => (
+              <SwiperSlide
+                key={product.name}
+                className="!w-[250px] !m-0 !p-0 relative"
               >
                 <Image
                   src={product.image}
                   alt={product.name}
                   width={250}
                   height={250}
-                  className="w-[250px] h-[250px] object-cover brightness-90 rounded-lg"
+                  className="w-[250px] h-[250px] object-cover rounded-none brightness-90"
+                  onClick={() => setSelectedProduct(product)}
                 />
                 <h3 className="absolute bottom-2 left-2 text-lg font-bold text-white drop-shadow-md">
                   {product.name}
                 </h3>
-              </div>
+              </SwiperSlide>
             ))}
+          </Swiper>
+
+          {/* Botones flechas */}
+          <div className="flex items-center justify-center gap-4 mt-4">
+            <button
+              id="prevDulces"
+              className="bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:bg-gray-100 font-bold disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <FaArrowLeft />
+            </button>
+
+            <button
+              id="nextDulces"
+              className="bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:bg-gray-100 font-bold disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <FaArrowRight />
+            </button>
           </div>
 
-          <button
-            onClick={() => setShowAllDulces(!showAllDulces)}
-            className="mt-4 px-4 py-2 bg-white text-black rounded-full flex items-center gap-2 mx-auto hover:cursor-pointer shadow-2xl transition-colors hover:bg-gray-300"
-          >
-            {showAllDulces ? "Mostrar menos" : "Mostrar más"}
-            <span
-              className={`transition-transform duration-300 ${showAllDulces ? "rotate-180" : ""
-                }`}
-            >
-              ▼
-            </span>
-          </button>
+          <p className="mt-2 text-sm sm:text-base">Ver más</p>
         </div>
 
         {/* Modal */}
         {selectedProduct && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg w-[90%] max-w-md relative">
+            <div className="bg-white p-6 rounded-2xl w-[95%] max-w-3xl relative flex flex-col md:flex-row gap-6">
+              {/* Botón cerrar */}
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-2 right-2 text-gray-600 hover:text-black"
+                className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl hover:cursor-pointer"
               >
                 ✖
               </button>
-              <Image
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                width={250}
-                height={250}
-                className="w-full h-64 object-cover rounded"
-              />
-              <h2 className="text-2xl font-bold mt-4">{selectedProduct.name}</h2>
-              <p className="text-gray-700 mt-2">
-                Aquí iría la descripción o detalles del producto.
-              </p>
-              <button
-                onClick={() => alert("Producto agregado al carrito")}
-                className="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
-              >
-                Continuar compra
-              </button>
+
+              {/* Imagen */}
+              <div className="w-full md:w-1/2 flex justify-center items-center">
+                <Image
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  width={400}
+                  height={400}
+                  objectFit="contain"
+                  className="object-cover rounded-lg"
+                />
+              </div>
+
+              {/* Info producto */}
+              <div className="w-full md:w-1/2 flex flex-col justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold">{selectedProduct.name}</h2>
+                  <p className="text-gray-600 mt-2">{selectedProduct.description}</p>
+
+                  {/* tamanos */}
+                  <div className="mt-4 flex gap-6">
+                    <div
+                      onClick={() => settamano("chico")}
+                      className={`hover:cursor-pointer flex flex-col items-center border p-3 rounded-lg w-28 ${tamano === "chico" ? "border-green-600" : "border-gray-300"
+                        }`}
+                    >
+                      <Image src="/PASTEL_CHICO.svg" alt="Pastel Chico" width={100} height={100} className="mb-2" />
+                      <span className="font-semibold">Chico</span>
+                      <span className="text-xs text-gray-500">(2 a 4 personas)</span>
+                    </div>
+
+                    <div
+                      onClick={() => settamano("grande")}
+                      className={`hover:cursor-pointer flex flex-col items-center border p-3 rounded-lg w-28 ${tamano === "grande" ? "border-green-600" : "border-gray-300"
+                        }`}
+                    >
+                      <Image src="/PASTEL_GRANDE.svg" alt="Pastel Grande" width={100} height={100} className="mb-2" />
+                      <span className="font-semibold">Grande</span>
+                      <span className="text-xs text-gray-500">(4 a 7 personas)</span>
+                    </div>
+                  </div>
+
+                  {/* Ingredientes */}
+                  <div className="mt-6">
+                    <p className="font-semibold">Ingredientes / Alérgenos:</p>
+                    <ul className="flex flex-wrap gap-2 mt-2 text-sm text-gray-700">
+                      {selectedProduct.ingredientes?.map((ing, index) => (
+                        <li key={index} className="flex items-center gap-1">
+                          <span className="w-2 h-2 bg-blue-400 rounded-full"></span> {ing}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Botones */}
+                <div className="mt-6 flex flex-col gap-3">
+                  <button
+                    onClick={handleAddToCart}
+                    className="bg-[#244437] hover:bg-[#1a332a] text-white py-2 rounded-md hover:cursor-pointer"
+                  >
+                    Agregar al carrito
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
+
+        {/* Imagen banner */}
+        <div className="flex justify-center md:py-4 md:p-10 bg-white">
+          <Image
+            src="/GALERIA.png"
+            alt="Galeria"
+            width={1920}
+            height={600}
+            className="w-full h-auto object-cover"
+          />
+        </div>
       </div>
+
 
       {/* Footer */}
       <footer className="text-white py-4 bg-[#244437] relative overflow-hidden">

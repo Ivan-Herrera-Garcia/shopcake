@@ -1,5 +1,6 @@
 const products = [
   {
+    id: 1,
     nameNormalidazo: 'Beijinho',
     name: 'Beijinho',
     ingredientes: ['Leche Condensada', 'Coco Rallado', 'Mantequilla'],
@@ -9,7 +10,8 @@ const products = [
     image: '/Beijinho 1.jpg',
     isDulce: true, // Indica que es un dulce
   },
-  {
+  { 
+    id: 2,
     nameNormalidazo: 'Bicho-de-Pe',
     name: 'Bicho de Pé',
     ingredientes: ['Leche Condensada', 'Maní', 'Chocolate'],
@@ -20,6 +22,7 @@ const products = [
     isDulce: true, // Indica que es un dulce
   },
   {
+    id: 3,
     nameNormalidazo: 'Bolo-de-Cenoura',
     name: 'Bolo de Cenoura',
     ingredientes: ['Zanahoria', 'Harina', 'Azúcar', 'Huevo', 'Chocolate'],
@@ -29,7 +32,8 @@ const products = [
     image: '/Bolo cenoura chico2 .jpg',
     isDulce: false, // Indica que es un pastel
   },
-  {
+  { 
+    id: 4,
     nameNormalidazo: 'Brigadeiro',
     name: 'Brigadeiro',
     ingredientes: ['Leche Condensada', 'Cacao en polvo', 'Mantequilla', 'Granulado'],
@@ -40,6 +44,7 @@ const products = [
     isDulce: true, // Indica que es un dulce
   },
   {
+    id: 5,
     nameNormalidazo: 'Pastel-de-Limon',
     name: 'Pastel de Limón',
     ingredientes: ['Limón', 'Harina', 'Azúcar', 'Huevo', 'Crema'],
@@ -50,6 +55,7 @@ const products = [
     isDulce: false, // Indica que es un pastel
   },
   {
+    id: 6,
     nameNormalidazo: 'Pastel-de-Naranja-Pequeno',
     name: 'Pastel de Naranja Pequeño',
     ingredientes: ['Naranja', 'Harina', 'Azúcar', 'Huevo', 'Ralladura'],
@@ -60,6 +66,7 @@ const products = [
     isDulce: false, // Indica que es un pastel
   },
   {
+    id: 7,
     nameNormalidazo: 'Pastel-de-Naranja',
     name: 'Pastel de Naranja',
     ingredientes: ['Naranja', 'Harina', 'Azúcar', 'Huevo', 'Glaseado'],
@@ -70,6 +77,7 @@ const products = [
     isDulce: false, // Indica que es un pastel
   },
   {
+    id: 8,
     nameNormalidazo: 'Pastel-Pao-de-Mel',
     name: 'Pastel Pão de Mel',
     ingredientes: ['Miel', 'Especias', 'Harina', 'Chocolate', 'Nueces'],
@@ -80,6 +88,7 @@ const products = [
     isDulce: false, // Indica que es un pastel
   },
   {
+    id: 9,
     nameNormalidazo: 'Pastel-de-Zanahoria-Chico',
     name: 'Pastel de Zanahoria Chico',
     ingredientes: ['Zanahoria', 'Harina', 'Azúcar', 'Canela', 'Nueces'],
@@ -90,6 +99,7 @@ const products = [
     isDulce: false, // Indica que es un pastel
   },
   {
+    id: 10,
     nameNormalidazo: 'Pastel-de-Zanahoria-Grande',
     name: 'Pastel de Zanahoria Grande',
     ingredientes: ['Zanahoria', 'Harina', 'Azúcar', 'Canela', 'Crema Cheese'],
