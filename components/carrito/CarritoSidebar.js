@@ -15,7 +15,7 @@ export default function CarritoSidebar({ onClose }) {
   const mensaje = encodeURIComponent(
     items.map((item) => `${item.name} x${item.quantity}`).join("\n")
   );
-  const whatsappLink = `https://wa.me/8711167745?text=${mensaje}`;
+  const whatsappLink = `https://wa.me/8713561876?text=${mensaje}`;
 
   return (
     <div className="absolute inset-0 bg-black bg-opacity-60 flex justify-end z-50">
