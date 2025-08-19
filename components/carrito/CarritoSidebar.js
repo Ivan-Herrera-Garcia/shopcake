@@ -8,17 +8,14 @@ export default function CarritoSidebar({ onClose }) {
   const items = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calcular total
-  const total = items.reduce((a, c) => a + c.price * c.quantity, 0);
-
   // Crear mensaje para WhatsApp
   const mensaje = encodeURIComponent(
     items.map((item) => `${item.name} x${item.quantity}`).join("\n")
   );
-  const whatsappLink = `https://wa.me/8713561876?text=${mensaje}`;
+  const whatsappLink = `https://api.whatsapp.com/send?phone=8713561876&text=${mensaje}`;
 
   return (
-    <div className="absolute inset-0 bg-black bg-opacity-60 flex justify-end z-50">
+    <div className="absolute inset-0 flex justify-end z-50" style={{ backdropFilter: "blur(5px)" }}>
       <div className="ml-auto w-96 bg-white h-full p-6 flex flex-col shadow-xl rounded-l-2xl">
         {/* Header */}
         <div className="flex justify-between items-center mb-6 border-b pb-3">
@@ -46,7 +43,7 @@ export default function CarritoSidebar({ onClose }) {
                 <div>
                   <p className="font-semibold">{item.name}</p>
                   <p className="text-sm text-gray-600">
-                    {item.quantity}
+                    Cantidad: {item.quantity}
                   </p>
                   <p className="text-sm text-gray-600">
                     Tamaño: {item.tamano}

@@ -1,7 +1,7 @@
 'use client'
 import products from "@/utils/productos";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -17,6 +17,7 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 import CarritoSidebar from "@/components/carrito/CarritoSidebar";
 
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function HomePage() {
 
@@ -39,6 +40,13 @@ export default function HomePage() {
 
   const [tamano, settamano] = useState("chico"); // tamano inicial
 
+  const [anyProduct, setAnyProduct] = useState(false);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setAnyProduct(true);
+    }
+  }, [selectedProduct]);
 
   return (
     <main className="min-h-screen flex flex-col bg-[#606060]">
@@ -59,7 +67,7 @@ export default function HomePage() {
         <button onClick={() => setShowCart(true)} className="relative hover:cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-white"
+            className="h-9 w-9 text-white"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -72,10 +80,35 @@ export default function HomePage() {
             />
           </svg>
           {/* Puedes agregar un contador de items */}
+          {anyProduct && (
+            <span className="absolute top-1 right-5 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
+              {cantidad}
+            </span>
+          )}
         </button>
 
-        {showCart && <CarritoSidebar onClose={() => setShowCart(false)} />}
-      </div>
+{/* AnimatePresence detecta mount/unmount */}
+      <AnimatePresence>
+        {showCart && (
+          <motion.div
+            className="absolute inset-0 flex justify-end z-50"
+            style={{ backdropFilter: "blur(5px)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="bg-white w-80 h-full shadow-2xl"
+            >
+              <CarritoSidebar onClose={() => setShowCart(false)} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>      </div>
 
       <div className="flex-grow bg-white flex flex-col items-center justify-center px-4 py-6">
 
@@ -268,15 +301,21 @@ export default function HomePage() {
 
                   {/* Ingredientes */}
                   <div className="mt-6">
-                    <p className="font-semibold">Ingredientes / Alérgenos:</p>
-                    <ul className="flex flex-wrap gap-2 mt-2 text-sm text-gray-700">
-                      {selectedProduct.ingredientes?.map((ing, index) => (
-                        <li key={index} className="flex items-center gap-1">
-                          <span className="w-2 h-2 bg-blue-400 rounded-full"></span> {ing}
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="font-semibold">Acerca del postre:</p>
+                    <p className="text-gray-600 mt-2">{selectedProduct.descripcion}</p>
                   </div>
+                </div>
+
+                {/* Cantidad elegida */}
+                <div className="mt-4">
+                  <p className="font-semibold">Cantidad:</p>
+                  <input
+                    type="number"
+                    min="1"
+                    value={cantidad}
+                    onChange={(e) => setCantidad(e.target.value)}
+                    className="border border-gray-300 rounded-md p-2 mt-1 w-full"
+                  />
                 </div>
 
                 {/* Botones */}

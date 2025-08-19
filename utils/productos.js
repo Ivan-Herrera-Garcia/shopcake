@@ -9,6 +9,7 @@ const products = [
     descripcion: 'Tradicional Brasiliuseño hecho con leche condensada y coco.',
     image: '/Beijinho 1.jpg',
     isDulce: true, // Indica que es un dulce
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   { 
     id: 2,
@@ -19,7 +20,8 @@ const products = [
     tamano: ["Grande", "Chico"],
     descripcion: 'Delicioso Brasiliuseño con maní y chocolate.',
     image: '/Bicho de pé 1.jpg',
-    isDulce: true, // Indica que es un dulce
+    isDulce: true, // Indica que es un dulce,
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const products = [
     descripcion: 'Esponjoso pastel de zanahoria con cobertura de chocolate.',
     image: '/Bolo cenoura chico2 .jpg',
     isDulce: false, // Indica que es un pastel
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   { 
     id: 4,
@@ -42,6 +45,7 @@ const products = [
     descripcion: 'El dulce más famoso de Brasil, irresistible brigadeiro.',
     image: '/Brigadeiro.jpg',
     isDulce: true, // Indica que es un dulce
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ const products = [
     descripcion: 'Refrescante pastel de limón con crema suave y esponjosa.',
     image: '/Pastel de Limón CH.jpg',
     isDulce: false, // Indica que es un pastel
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     id: 6,
@@ -64,6 +69,7 @@ const products = [
     descripcion: 'Pastel individual de naranja con sabor cítrico intenso.',
     image: '/Pastel de Naranja Pequeño .jpg',
     isDulce: false, // Indica que es un pastel
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     id: 7,
@@ -75,6 +81,7 @@ const products = [
     descripcion: 'Jugoso pastel de naranja con glaseado cítrico.',
     image: '/Pastel Naranja.jpg',
     isDulce: false, // Indica que es un pastel
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     id: 8,
@@ -86,6 +93,7 @@ const products = [
     descripcion: 'Tradicional pan de miel brasileño con chocolate y especias.',
     image: '/Pastel Pao de Mel Op2.jpg',
     isDulce: false, // Indica que es un pastel
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     id: 9,
@@ -97,6 +105,7 @@ const products = [
     descripcion: 'Pastel de zanahoria tamaño individual con canela y nueces.',
     image: '/Pastel Zanahoria CH.jpg',
     isDulce: false, // Indica que es un pastel
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
   {
     id: 10,
@@ -108,6 +117,7 @@ const products = [
     descripcion: 'Generoso pastel de zanahoria con cobertura de queso crema.',
     image: '/Pastel Zanahoria G.jpg',
     isDulce: false, // Indica que es un pastel
+    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   },
 ];
 
