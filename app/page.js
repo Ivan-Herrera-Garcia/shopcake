@@ -1,7 +1,7 @@
 'use client'
 import products from "@/utils/productos";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -23,7 +23,7 @@ export default function HomePage() {
 
   const dispatch = useDispatch();
   const [cantidad, setCantidad] = useState(1); // cantidad inicial
-
+  
   const handleAddToCart = () => {
     if (cantidad < 1) return; // evitar agregar 0 o negativo
     dispatch(addToCart({ ...selectedProduct, quantity: cantidad }));
@@ -31,9 +31,9 @@ export default function HomePage() {
   };
 
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+  
   const salados = products.filter((p) => !p.isDulce);
-
+  
   const productosDulces = products.filter((p) => p.isDulce);
 
   const [showCart, setShowCart] = useState(false);
@@ -47,6 +47,13 @@ export default function HomePage() {
       setAnyProduct(true);
     }
   }, [selectedProduct]);
+
+  
+  const pasteles = useRef(null);
+  const dulces = useRef(null);
+  const scrollToSection = (section) => {
+    section.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <main className="min-h-screen flex flex-col bg-[#606060]">
@@ -87,37 +94,37 @@ export default function HomePage() {
           )}
         </button>
 
-{/* AnimatePresence detecta mount/unmount */}
-      <AnimatePresence>
-        {showCart && (
-          <motion.div
-            className="absolute inset-0 flex justify-end z-50"
-            style={{ backdropFilter: "blur(5px)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
+        {/* AnimatePresence detecta mount/unmount */}
+        <AnimatePresence>
+          {showCart && (
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-white w-80 h-full shadow-2xl"
+              className="absolute inset-0 flex justify-end z-50"
+              style={{ backdropFilter: "blur(5px)" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              <CarritoSidebar onClose={() => setShowCart(false)} />
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="bg-white w-80 h-full shadow-2xl"
+              >
+                <CarritoSidebar onClose={() => setShowCart(false)} />
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>      </div>
+          )}
+        </AnimatePresence>      </div>
 
       <div className="flex-grow bg-white flex flex-col items-center justify-center px-4 py-6">
 
         {/* Navbar */}
         <nav className="flex justify-center w-full mb-6">
           <ul className="flex space-x-6 md:space-x-10 text-lg md:text-2xl font-bold">
-            <li><a href="#" className="principal">Pasteles</a></li>
+            <li><a onClick={() => scrollToSection(pasteles)} className="principal">Pasteles</a></li>
             {/* <li><a href="#" className="principal">Roscas</a></li> */}
-            <li><a href="#" className="principal">Dulces</a></li>
+            <li><a onClick={() => scrollToSection(dulces)} className="principal">Dulces</a></li>
             {/* <li><a href="#" className="principal">Galeria</a></li> */}
           </ul>
         </nav>
@@ -128,7 +135,7 @@ export default function HomePage() {
           <span className="secundario cursive text-[32px]">deliciosa</span>
         </h2>
 
-        <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center">
+        <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center" ref={pasteles}>
           <Swiper
             modules={[Navigation]}
             navigation={{
@@ -187,7 +194,7 @@ export default function HomePage() {
           <p className="mt-2 text-sm sm:text-base">Ver más</p>
         </div>
 
-        <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center">
+        <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center" ref={dulces}>
           <Swiper
             modules={[Navigation]}
             navigation={{
@@ -367,7 +374,7 @@ export default function HomePage() {
 
         <div className="container mx-auto text-center mt-8 relative z-10">
           <h2 className="cursive text-3xl italic">Contactanos</h2>
-          <p>&copy; 2023 Brasilius. Todos los derechos reservados.</p>
+          <p>&copy; 2025 Brasilius. Todos los derechos reservados.</p>
         </div>
       </footer>
 
