@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import Providers from "./Providers";
 import "./globals.css";
 
@@ -12,20 +12,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
 export const metadata = {
   title: "Brasilius",
   description: "Desde la calidez de Brasil, traemos los sabores más auténticos y deliciosos de la repostería brasileña. Disfruta de nuestros pasteles y dulces tradicionales, elaborados con amor y pasión por la cocina brasileña.",
   icons: {
-    icon: "https://dulcebrasil.netlify.app/image_2.jpg",
+    icon: "https://brasilius.netlify.app/image_2.jpg",
   },
   openGraph: {
     title: "Brasilius",
     description: "Desde la calidez de Brasil, traemos los sabores más auténticos y deliciosos de la repostería brasileña. Disfruta de nuestros pasteles y dulces tradicionales, elaborados con amor y pasión por la cocina brasileña.",
-    url: "https://dulcebrasil.netlify.app/",
+    url: "https://brasilius.netlify.app/",
     siteName: "Brasilius",
     images: [
       {
-        url: "https://dulcebrasil.netlify.app/image_2.jpg",
+        url: "https://brasilius.netlify.app/image_2.jpg",
         width: 800,
         height: 600,
         alt: "Brasilius Logo",
@@ -36,7 +41,7 @@ export const metadata = {
     title: "Brasilius",
     description: "Desde la calidez de Brasil, traemos los sabores más auténticos y deliciosos de la repostería brasileña. Disfruta de nuestros pasteles y dulces tradicionales, elaborados con amor y pasión por la cocina brasileña.",
     card: "summary_large_image",
-    site: "@dulcebrasil",
+    site: "@brasilius",
   },
 };
 
@@ -49,7 +54,7 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased`}
       >
         <Providers>
           {children}

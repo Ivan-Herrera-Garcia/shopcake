@@ -12,7 +12,6 @@ import "swiper/css/navigation";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
 
-
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 import CarritoSidebar from "@/components/carrito/CarritoSidebar";
@@ -23,17 +22,18 @@ export default function HomePage() {
 
   const dispatch = useDispatch();
   const [cantidad, setCantidad] = useState(1); // cantidad inicial
-  
+
   const handleAddToCart = () => {
     if (cantidad < 1) return; // evitar agregar 0 o negativo
     dispatch(addToCart({ ...selectedProduct, quantity: cantidad }));
+    setAnyProduct(true);
     setSelectedProduct(null); // cerrar modal
   };
 
   const [selectedProduct, setSelectedProduct] = useState(null);
-  
+
   const salados = products.filter((p) => !p.isDulce);
-  
+
   const productosDulces = products.filter((p) => p.isDulce);
 
   const [showCart, setShowCart] = useState(false);
@@ -42,13 +42,6 @@ export default function HomePage() {
 
   const [anyProduct, setAnyProduct] = useState(false);
 
-  useEffect(() => {
-    if (selectedProduct) {
-      setAnyProduct(true);
-    }
-  }, [selectedProduct]);
-
-  
   const pasteles = useRef(null);
   const dulces = useRef(null);
   const scrollToSection = (section) => {
@@ -122,9 +115,9 @@ export default function HomePage() {
         {/* Navbar */}
         <nav className="flex justify-center w-full mb-6">
           <ul className="flex space-x-6 md:space-x-10 text-lg md:text-2xl font-bold">
-            <li><a onClick={() => scrollToSection(pasteles)} className="principal">Pasteles</a></li>
+            <li><a onClick={() => scrollToSection(pasteles)} className="principal hover:cursor-pointer" aria-label="Ir a la sección de pasteles" aria-labelledby="Ir a la sección de pasteles">Pasteles</a></li>
             {/* <li><a href="#" className="principal">Roscas</a></li> */}
-            <li><a onClick={() => scrollToSection(dulces)} className="principal">Dulces</a></li>
+            <li><a onClick={() => scrollToSection(dulces)} className="principal hover:cursor-pointer" aria-label="Ir a la sección de dulces" aria-labelledby="Ir a la sección de dulces">Dulces</a></li>
             {/* <li><a href="#" className="principal">Galeria</a></li> */}
           </ul>
         </nav>
@@ -132,7 +125,7 @@ export default function HomePage() {
         {/* Subtitulo */}
         <h2 className="text-center text-2xl font-bold mb-8 principal">
           Descubre Brasil de una manera{" "}
-          <span className="secundario cursive text-[32px]">deliciosa</span>
+          <span className="secundario cursive">deliciosa</span>
         </h2>
 
         <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center" ref={pasteles}>
@@ -191,7 +184,11 @@ export default function HomePage() {
             </button>
           </div>
 
-          <p className="mt-2 text-sm sm:text-base">Ver más</p>
+          <div className="flex justify-center w-full mb-6">
+            <ul className="flex space-x-6 md:space-x-10 text-lg md:text-2xl font-bold">
+              <li><a className="principal">Ver más</a></li>
+            </ul>
+          </div>
         </div>
 
         <div className="w-full max-w-7xl mb-12 relative flex flex-col items-center" ref={dulces}>
@@ -236,6 +233,8 @@ export default function HomePage() {
           {/* Botones flechas */}
           <div className="flex items-center justify-center gap-4 mt-4">
             <button
+              aria-label="Desplazamiento izquierdo en seccion de dulces"
+              aria-labelledby="Desplazamiento izquierdo en seccion de dulces"
               id="prevDulces"
               className="bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:bg-gray-100 font-bold disabled:opacity-40 disabled:cursor-not-allowed"
             >
@@ -243,6 +242,8 @@ export default function HomePage() {
             </button>
 
             <button
+              aria-label="Desplazamiento derecho en seccion de dulces"
+              aria-labelledby="Desplazamiento derecho en seccion de dulces"
               id="nextDulces"
               className="bg-white text-black w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:bg-gray-100 font-bold disabled:opacity-40 disabled:cursor-not-allowed"
             >
@@ -250,7 +251,11 @@ export default function HomePage() {
             </button>
           </div>
 
-          <p className="mt-2 text-sm sm:text-base">Ver más</p>
+          <div className="flex justify-center w-full mb-6">
+            <ul className="flex space-x-6 md:space-x-10 text-lg md:text-2xl font-bold">
+              <li><a className="principal">Ver más</a></li>
+            </ul>
+          </div>        
         </div>
 
         {/* Modal */}
@@ -259,6 +264,8 @@ export default function HomePage() {
             <div className="bg-white p-6 rounded-2xl w-[95%] max-w-3xl relative flex flex-col md:flex-row gap-6">
               {/* Botón cerrar */}
               <button
+                aria-label="Cerrar modal"
+                aria-labelledby="Cerrar modal"
                 onClick={() => setSelectedProduct(null)}
                 className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl hover:cursor-pointer"
               >
@@ -286,6 +293,8 @@ export default function HomePage() {
                   {/* tamanos */}
                   <div className="mt-4 flex gap-6">
                     <div
+                      aria-label="Seleccionar tamaño chico"
+                      aria-labelledby="Seleccionar tamaño chico"
                       onClick={() => settamano("chico")}
                       className={`hover:cursor-pointer flex flex-col items-center border p-3 rounded-lg w-28 ${tamano === "chico" ? "border-green-600" : "border-gray-300"
                         }`}
@@ -296,6 +305,8 @@ export default function HomePage() {
                     </div>
 
                     <div
+                      aria-label="Seleccionar tamaño grande"
+                      aria-labelledby="Seleccionar tamaño grande"
                       onClick={() => settamano("grande")}
                       className={`hover:cursor-pointer flex flex-col items-center border p-3 rounded-lg w-28 ${tamano === "grande" ? "border-green-600" : "border-gray-300"
                         }`}
@@ -317,6 +328,8 @@ export default function HomePage() {
                 <div className="mt-4">
                   <p className="font-semibold">Cantidad:</p>
                   <input
+                    aria-label="Cantidad de productos"
+                    aria-labelledby="Cantidad de productos"
                     type="number"
                     min="1"
                     value={cantidad}
@@ -328,6 +341,8 @@ export default function HomePage() {
                 {/* Botones */}
                 <div className="mt-6 flex flex-col gap-3">
                   <button
+                    aria-label="Agregar producto al carrito"
+                    aria-labelledby="Agregar producto al carrito"
                     onClick={handleAddToCart}
                     className="bg-[#244437] hover:bg-[#1a332a] text-white py-2 rounded-md hover:cursor-pointer"
                   >

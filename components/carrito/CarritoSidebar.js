@@ -3,6 +3,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "./../../store/cartSlice"; // 👈 importa tu acción
 import { X } from "lucide-react"; // icono más bonito
+import Image from "next/image";
 
 export default function CarritoSidebar({ onClose }) {
   const items = useSelector((state) => state.cart.items);
@@ -40,17 +41,30 @@ export default function CarritoSidebar({ onClose }) {
                 key={item.id}
                 className="flex justify-between items-center bg-gray-50 p-3 rounded-lg shadow-sm"
               >
-                <div>
-                  <p className="font-semibold">{item.name}</p>
-                  <p className="text-sm text-gray-600">
-                    Cantidad: {item.quantity}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Tamaño: {item.tamano}
-                  </p>
+                <div className="flex gap-2">
+                  <Image
+                    width={64}
+                    height={64}
+                    src={item.image}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover rounded-md"
+                    aria-labelledby={"Imagen del producto " + item.name}
+                    aria-label={"Imagen del producto " + item.name}
+                  />
+                  <div>
+                    <p className="font-semibold">{item.name}</p>
+                    <p className="text-sm text-gray-600">
+                      Cantidad: {item.quantity}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Tamaño: {item.tamano}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-start gap-2">
                   <button
+                    aria-label={"Remover producto del carrito " + item.name}
+                    aria-labelledby={"Remover producto del carrito " + item.name}
                     onClick={() => dispatch(removeFromCart(item.id))}
                     className="text-red-500 hover:text-red-700 font-bold hover:cursor-pointer"
                   >
@@ -66,6 +80,8 @@ export default function CarritoSidebar({ onClose }) {
         {items.length > 0 && (
           <div className="mt-6 border-t pt-4">
             <a
+              aria-labelledby="Enviar pedido por WhatsApp"
+              aria-label="Enviar pedido por WhatsApp"
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
