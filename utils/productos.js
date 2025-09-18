@@ -45,7 +45,7 @@ const products = [
     descripcion: 'El dulce más famoso de Brasil, irresistible brigadeiro.',
     image: '/Brigadeiro.jpg',
     isDulce: true, // Indica que es un dulce
-    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    descripcion: 'Brigadeiro hecho de chocolate semiamargo, típico dulce presente en todos los cumpleaños brasileños.'
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const products = [
     descripcion: 'Refrescante pastel de limón con crema suave y esponjosa.',
     image: '/Pastel de Limón CH.jpg',
     isDulce: false, // Indica que es un pastel
-    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    descripcion: 'Pastel de limón: suave, esponjoso y con su característico color verde, con una refrescante cobertura de mousse de limón.'
   },
   {
     id: 6,
@@ -69,7 +69,7 @@ const products = [
     descripcion: 'Pastel individual de naranja con sabor cítrico intenso.',
     image: '/Pastel de Naranja Pequeño .jpg',
     isDulce: false, // Indica que es un pastel
-    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    descripcion: 'Pastel de naranja natural jugoso, bañado en un almíbar de naranja dulce y aromático.'
   },
   {
     id: 7,
@@ -81,7 +81,7 @@ const products = [
     descripcion: 'Jugoso pastel de naranja con glaseado cítrico.',
     image: '/Pastel Naranja.jpg',
     isDulce: false, // Indica que es un pastel
-    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    descripcion: 'Pastel de naranja natural jugoso, bañado en un almíbar de naranja dulce y aromático.'
   },
   {
     id: 8,
@@ -93,7 +93,7 @@ const products = [
     descripcion: 'Tradicional pan de miel brasileño con chocolate y especias.',
     image: '/Pastel Pao de Mel Op2.jpg',
     isDulce: false, // Indica que es un pastel
-    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    descripcion: 'Pastel de Pão de Mel, especiado y relleno con dulce de leche, cubierto con una irresistible capa de chocolate semiamargo.'
   },
   {
     id: 9,
@@ -105,7 +105,7 @@ const products = [
     descripcion: 'Pastel de zanahoria tamaño individual con canela y nueces.',
     image: '/Pastel Zanahoria CH.jpg',
     isDulce: false, // Indica que es un pastel
-    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    descripcion: 'Pastel de zanahoria con 100% de zanahoria, esponjoso y con una cobertura de ganache de chocolate semiamargo.'
   },
   {
     id: 10,
@@ -117,7 +117,7 @@ const products = [
     descripcion: 'Generoso pastel de zanahoria con cobertura de queso crema.',
     image: '/Pastel Zanahoria G.jpg',
     isDulce: false, // Indica que es un pastel
-    descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    descripcion: 'Pastel de zanahoria con 100% de zanahoria, esponjoso y con una cobertura de ganache de chocolate semiamargo.'
   },
 ];
 

@@ -8,12 +8,13 @@ import Image from "next/image";
 export default function CarritoSidebar({ onClose }) {
   const items = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-
+  
   // Crear mensaje para WhatsApp
   const mensaje = encodeURIComponent(
-    items.map((item) => `${item.name} x${item.quantity}`).join("\n")
+    items.map((item) => `${item.name} x${item.quantity} - Tamaño: ${item.tamano}`).join("\n")
   );
-  const whatsappLink = `https://api.whatsapp.com/send?phone=8713561876&text=${mensaje}`;
+  const phoneNumber = '528713561876';
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${mensaje}`;
 
   return (
     <div className="absolute inset-0 flex justify-end z-50" style={{ backdropFilter: "blur(5px)" }}>
